@@ -1,0 +1,26 @@
+{
+  "name": "Chibi-Pomo",
+  "version": "0.2",
+  "manifest_version": 3,
+  "description": "Try out our Chibi-Pomo to get your productivity up.",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["sidePanel", "aiLanguageModelOriginTrial"],
+  "trial_tokens": [
+    "Arh5T4v3O0+8vNxh/DR+h9IonLUF4tSR5X5XfxiSv3BZi1pTB24ESfVTwW0BvON6DCX3oc8J4ao3xvZNuc9eyQEAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ25tYWJobmljbmFkYWFpZGlwY2htZGpwampjbWVnbmciLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
+  ],
+  "minimum_chrome_version": "131",
+  "side_panel": {
+    "default_path": "sidepanel/index.html"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "Open Chat Interface"
+  }
+}
