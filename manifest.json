@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["sidePanel", "aiLanguageModelOriginTrial"],
+  "permissions": ["sidePanel", "aiLanguageModelOriginTrial", "storage", "tabs"],
   "trial_tokens": [
     "Arh5T4v3O0+8vNxh/DR+h9IonLUF4tSR5X5XfxiSv3BZi1pTB24ESfVTwW0BvON6DCX3oc8J4ao3xvZNuc9eyQEAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ25tYWJobmljbmFkYWFpZGlwY2htZGpwampjbWVnbmciLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
   ],
@@ -14,8 +14,15 @@
   "side_panel": {
     "default_path": "sidepanel/index.html"
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>", "file://*/*", "http://*/*", "https://*/*", "*://*/*"],
+      "js": ["sidepanel/content/content.js"],
+      "css": ["sidepanel/popup/styles.css"]
+    }
+  ],
   "action": {
-    "default_popup": "sidepanel/index.html",
+    "default_popup": "sidepanel/popup/popup.html",
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",

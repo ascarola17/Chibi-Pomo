@@ -1,0 +1,43 @@
+#user-stats-box {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+.box-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.box-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+#close-box {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  color: #888;
+}
+
+#close-box:hover {
+  color: #333;
+}
+
+#user-stats-box p {
+  margin: 5px 0;
+  font-size: 14px;
+}
