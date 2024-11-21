@@ -1,7 +1,6 @@
 chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.error(error));
-
   // Initialize default stats
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.sync.set({
@@ -12,6 +11,7 @@ chrome.runtime.onInstalled.addListener(() => {
     }
   });
 });
+
 
 // Update stats every minute
 // setInterval(() => {

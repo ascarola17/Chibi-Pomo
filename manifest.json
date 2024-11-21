@@ -12,17 +12,17 @@
   ],
   "minimum_chrome_version": "131",
   "side_panel": {
-    "default_path": "sidepanel/index.html"
+    "default_path": "extension/index.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>", "file://*/*", "http://*/*", "https://*/*", "*://*/*"],
-      "js": ["sidepanel/content/content.js"],
-      "css": ["sidepanel/popup/styles.css"]
+      "js": ["extension/content/content.js"],
+      "css": ["extension/popup/styles.css"]
     }
   ],
   "action": {
-    "default_popup": "sidepanel/popup/popup.html",
+    "default_popup": "extension/popup/popup.html",
     "default_icon": {
       "16": "images/icon16.png",
       "32": "images/icon32.png",

@@ -1,3 +1,4 @@
+
 // Create and inject the floating box
 function createFloatingBox() {
   const box = document.createElement('div');

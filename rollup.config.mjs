@@ -4,9 +4,9 @@ import copy from 'rollup-plugin-copy';
 
 export default [
   {
-    input: 'sidepanel/index.js',
+    input: 'extension/index.js',
     output: {
-      dir: 'dist/sidepanel',
+      dir: 'dist/extension',
       format: 'iife',
     },
     plugins: [
@@ -19,7 +19,7 @@ export default [
       copy({
         targets: [
           {
-            src: ['manifest.json', 'background.js', 'sidepanel', 'images'],
+            src: ['manifest.json', 'background.js', 'extension', 'images'],
             dest: 'dist'
           }
         ]
