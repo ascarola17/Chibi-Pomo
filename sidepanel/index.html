@@ -3,7 +3,28 @@
   <head>
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
+
   <body>
+    <div class="container">
+      <div class = "timer-container">
+        <button id="pomodorobtn" class="active">Pomodoro</button>
+        <button id="shortbrkbtn">Shortbreak</button>
+        <button id="longbrkbtn">Long break</button>
+      </div>
+      <div class="pomdoro-count"></div>
+      <div class="progressbar">
+        <div class="progrsbar-inner">
+          <h2 class="progressbar-number">25:00</h2>
+        </div>
+      </div>
+      <div class="function-buttons">
+        <button id="startbtn">Start</button>
+        <button id="pausebtn">Pause</button>
+        <button id="resetbtn">Reset</button>
+      </div>
+      </div>
+      
+    </div>
     <textarea
       id="input-prompt"
       placeholder='Type something, e.g. "Write a haiku about Chrome Extensions"'
