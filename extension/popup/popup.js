@@ -27,3 +27,7 @@ document.getElementById('reset-stats').addEventListener('click', () => {
       chrome.tabs.sendMessage(tabs[0].id, {action: "toggleBox"});
     });
   });
+
+document.getElementById('toggleSidePanel').addEventListener('click', function() {
+  chrome.runtime.sendMessage({ action: 'toggleSidePanel' });
+});

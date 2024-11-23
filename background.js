@@ -13,6 +13,7 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 
+
 // Update stats every minute
 // setInterval(() => {
 //   chrome.storage.sync.get('userStats', (data) => {

@@ -3,6 +3,7 @@
 function createFloatingBox() {
   const box = document.createElement('div');
   box.id = 'user-stats-box';
+
   box.innerHTML = `
     <div class="box-header">
       <h3>User Stats</h3>

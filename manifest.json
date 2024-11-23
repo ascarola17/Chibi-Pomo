@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["sidePanel", "aiLanguageModelOriginTrial", "storage", "tabs"],
+  "permissions": ["sidePanel", "aiLanguageModelOriginTrial", "storage", "tabs", "sidePanel"],
   "trial_tokens": [
     "Arh5T4v3O0+8vNxh/DR+h9IonLUF4tSR5X5XfxiSv3BZi1pTB24ESfVTwW0BvON6DCX3oc8J4ao3xvZNuc9eyQEAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ25tYWJobmljbmFkYWFpZGlwY2htZGpwampjbWVnbmciLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
   ],
