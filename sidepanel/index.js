@@ -139,7 +139,7 @@ function hide(element) {
 
 const startBtn = document.querySelector("#startbtn");
 const stopBtn = document.querySelector("#pausebtn");
-const resetBtn = document.querySelector("#resetbtn");
+const timerResetBtn = document.getElementById("timer-resetbtn"); // New selector
 const progressbar = document.querySelector(".progressbar");
 const progressbarNumber = document.querySelector(".progressbar .progressbar-number");
 const pomodoroBtn = document.getElementById("pomodorobtn");
@@ -159,8 +159,23 @@ let pomodoroType = "POMODORO";
 
 const increaseTimeBtn = document.getElementById("increase-time");
 const decreaseTimeBtn = document.getElementById("decrease-time");
+
 const pomCount = document.createElement("div"); // For Pomodoro Count
 
+let pauseCountdown = 30;
+let pauseInterval;
+
+let pomodoroCount = 0;
+const pomodorosUntilLongBreak = 4;
+let currentXP = 0;
+const xpPerSession = 10;
+const xpToLevelUp = 100;
+
+
+// Pause Message Elements
+const pauseMessage = document.getElementById("pause-message");
+const pauseCountdownDisplay = document.getElementById("pause-countdown");
+const resumeBtn = document.getElementById("resume-btn");
 
 startBtn.addEventListener("click", () => {
   startTimer();
@@ -177,9 +192,16 @@ shortbrkBtn.addEventListener("click", () => {
 longbrkBtn.addEventListener("click", () => {
   setTimeType("LONGBREAK");
 });
-resetBtn.addEventListener("click", () => {
+
+timerResetBtn.addEventListener("click", () => {
+  console.log("Reset button clicked!"); // Debug log
   resetTimer();
 });
+
+resumeBtn.addEventListener("click", () => {
+  startTimer();
+});
+
 increaseTimeBtn.addEventListener("click", () => {
   adjustTimer(60); 
 });
@@ -187,32 +209,41 @@ decreaseTimeBtn.addEventListener("click", () => {
   adjustTimer(-60); 
 });
 
-
 function startTimer() {
+  if (progressInterval) {
+    return; // Prevent multiple intervals
+  }
+
+  // Clear pause countdown if resuming
+  if (pauseInterval) {
+    clearInterval(pauseInterval);
+    pauseInterval = null;
+    pauseMessage.style.display = "none";
+  }
+
   progressInterval = setInterval(() => {
     timerValue--;
-    console.log(timerValue);
     setProgressInfo();
-    if (timerValue === 0) {
+
+    if (timerValue <= 0) {
       clearInterval(progressInterval);
-      pomdoroCount++;
-      pomCount.style.display = "block";
-      pomCount.style.color = "white";
-      pomCount.style.fontSize = "30px";
-      pomCount.textContent = `Pomodoro Count ${pomdoroCount}`;
-      if (pomdoroCount % pomodorountilLongbrk === 0) {
-        longbrkBtn.style.display = "flex";
-      }
-      setTimeType(pomodoroType);
+      progressInterval = null;
+      handlePomodoroCompletion();
     }
   }, 1000);
 }
+
+
+
+
 function setProgressInfo() {
-  progressbarNumber.textContent = `${NumbertoString(timerValue)}`; // Corrected function call
+  console.log(`Updating display: ${NumbertoString(timerValue)}`);
+  progressbarNumber.textContent = `${NumbertoString(timerValue)}`;
   progressbar.style.background = `conic-gradient(rgb(243, 72, 109) ${
     timerValue * multipliervalue
   }deg,crimson 0deg)`;
 }
+
 
 function NumbertoString(number) {
   const minutes = Math.trunc(number / 60)
@@ -224,10 +255,39 @@ function NumbertoString(number) {
   return `${minutes}:${seconds}`;
 }
 
+let pauseTimeout;
 
 function pauseTimer() {
   clearInterval(progressInterval);
+  progressInterval = null;
+
+  // Display pause message
+  pauseCountdown = 30; // Reset countdown
+  pauseMessage.style.display = "block";
+  updatePauseCountdown();
+
+  // Start the countdown interval
+  pauseInterval = setInterval(() => {
+    pauseCountdown--;
+    updatePauseCountdown();
+
+    if (pauseCountdown <= 0) {
+      clearInterval(pauseInterval);
+      pauseInterval = null;
+      pauseMessage.style.display = "none";
+      alert("You didn't come back in time. Progress lost!");
+      resetTimer();
+      pomodoroCount = 0; // Reset progress
+      currentXP = Math.max(0, currentXP - xpPerSession); // Penalize XP
+      updateXPBar();
+    }
+  }, 1000);
 }
+
+function updatePauseCountdown() {
+  pauseCountdownDisplay.textContent = pauseCountdown;
+}
+
 
 function setTimeType(type) {
   pomodoroType = type;
@@ -248,19 +308,68 @@ function setTimeType(type) {
 }
 
 function resetTimer() {
+  // Stop the timer interval
   clearInterval(progressInterval);
+  progressInterval = null; // Clear the interval reference
+
+  // Reset timer value to the default for the current mode
   timerValue =
     pomodoroType === "POMODORO"
       ? pomodorotimer
       : pomodoroType === "SHORTBREAK"
       ? shortbreaktimer
       : longbreaktimer;
+
+  // Recalculate the multiplier for progress bar
   multipliervalue = 360 / timerValue;
+
+  // Update the progress bar and display immediately
   setProgressInfo();
+  progressbarNumber.textContent = NumbertoString(timerValue);
+
+  console.log(`Timer reset to: ${NumbertoString(timerValue)}`);
 }
+
 function adjustTimer(amount) {
   timerValue += amount;
   if (timerValue < 0) timerValue = 0; // Prevent negative timer
   multipliervalue = 360 / timerValue;
   setProgressInfo();
+  console.log(`Timer adjusted to: ${timerValue}`);
+}
+
+function handlePomodoroCompletion() {
+  if (pomodoroType === "POMODORO") {
+    pomodoroCount++;
+    gainXP(); // Call function to gain XP
+    if (pomodoroCount % pomodorosUntilLongBreak === 0) {
+      setTimeType("LONGBREAK");
+    } else {
+      setTimeType("SHORTBREAK");
+    }
+  } else {
+    setTimeType("POMODORO");
+  }
+  resetTimer();
+  startTimer(); // Automatically start the next session
+}
+
+
+function gainXP() {
+  currentXP += xpPerSession;
+  if (currentXP >= xpToLevelUp) {
+    currentXP -= xpToLevelUp;
+    // Optionally, increase level or handle leveling up
+  }
+  updateXPBar();
+}
+function updateXPBar() {
+  const xpFill = document.querySelector(".xp-bar-fill");
+  const xpDisplay = document.getElementById("xp-display");
+  const xpTotal = document.getElementById("xp-total");
+
+  const xpPercentage = (currentXP / xpToLevelUp) * 100;
+  xpFill.style.width = `${xpPercentage}%`;
+  xpDisplay.textContent = currentXP;
+  xpTotal.textContent = xpToLevelUp;
 }
