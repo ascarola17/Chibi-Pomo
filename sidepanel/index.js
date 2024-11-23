@@ -145,8 +145,9 @@ const progressbarNumber = document.querySelector(".progressbar .progressbar-numb
 const pomodoroBtn = document.getElementById("pomodorobtn");
 const shortbrkBtn = document.getElementById("shortbrkbtn");
 const longbrkBtn = document.getElementById("longbrkbtn");
-const pomCount = document.querySelector(".pomdoro-count");
+//const pomCount = document.querySelector(".pomdoro-count");
 let pomdoroCount = 0;
+
 const pomodorountilLongbrk = 4;
 const pomodorotimer = 1500; /* 25 minutes*/
 const shortbreaktimer = 300; /* 5 minutes*/
@@ -155,6 +156,12 @@ let timerValue = pomodorotimer;
 let multipliervalue = 360 / timerValue;
 let progressInterval;
 let pomodoroType = "POMODORO";
+
+const increaseTimeBtn = document.getElementById("increase-time");
+const decreaseTimeBtn = document.getElementById("decrease-time");
+const pomCount = document.createElement("div"); // For Pomodoro Count
+
+
 startBtn.addEventListener("click", () => {
   startTimer();
 });
@@ -173,6 +180,13 @@ longbrkBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => {
   resetTimer();
 });
+increaseTimeBtn.addEventListener("click", () => {
+  adjustTimer(60); 
+});
+decreaseTimeBtn.addEventListener("click", () => {
+  adjustTimer(-60); 
+});
+
 
 function startTimer() {
   progressInterval = setInterval(() => {
@@ -201,9 +215,11 @@ function setProgressInfo() {
 }
 
 function NumbertoString(number) {
-  const minutes = Math.trunc(number / 60).toString()
+  const minutes = Math.trunc(number / 60)
+    .toString()
     .padStart(2, "0");
-  const seconds = Math.trunc(number % 60).toString()
+  const seconds = Math.trunc(number % 60)
+    .toString()
     .padStart(2, "0");
   return `${minutes}:${seconds}`;
 }
@@ -239,6 +255,12 @@ function resetTimer() {
       : pomodoroType === "SHORTBREAK"
       ? shortbreaktimer
       : longbreaktimer;
+  multipliervalue = 360 / timerValue;
+  setProgressInfo();
+}
+function adjustTimer(amount) {
+  timerValue += amount;
+  if (timerValue < 0) timerValue = 0; // Prevent negative timer
   multipliervalue = 360 / timerValue;
   setProgressInfo();
 }
