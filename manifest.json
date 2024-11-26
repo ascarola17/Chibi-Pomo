@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["sidePanel", "aiLanguageModelOriginTrial", "storage", "tabs", "sidePanel"],
+  "permissions": ["sidePanel", "aiLanguageModelOriginTrial", "storage", "tabs", "sidePanel", "fileSystem"],
   "trial_tokens": [
     "Arh5T4v3O0+8vNxh/DR+h9IonLUF4tSR5X5XfxiSv3BZi1pTB24ESfVTwW0BvON6DCX3oc8J4ao3xvZNuc9eyQEAAAB4eyJvcmlnaW4iOiJjaHJvbWUtZXh0ZW5zaW9uOi8vZ25tYWJobmljbmFkYWFpZGlwY2htZGpwampjbWVnbmciLCJmZWF0dXJlIjoiQUlQcm9tcHRBUElGb3JFeHRlbnNpb24iLCJleHBpcnkiOjE3NjA0ODYzOTl9"
   ],
@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>", "file://*/*", "http://*/*", "https://*/*", "*://*/*"],
-      "js": ["extension/content/content.js"],
+      "js": ["extension/floating_boxes/floatingBoxFunction.js", "extension/floating_boxes/floatingBoxesClass.js"],
       "css": ["extension/popup/styles.css"]
     }
   ],
@@ -30,5 +30,13 @@
       "128": "images/icon128.png"
     },
     "default_title": "Open Chat Interface"
-  }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "extension/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
