@@ -38,14 +38,24 @@
           <button id="pausebtn">Pause</button>
           <button id="timer-resetbtn">Reset</button>
         </div>
+
+        <!-- End of Timer Section -->
+
          <!-- XP Bar -->
          <div class="xp-bar-container">
           <div class="xp-bar">
             <div class="xp-bar-fill" style="width: 0%;"></div>
           </div>
-          <div class="xp-info">XP: <span id="xp-display">0</span>/<span id="xp-total">100</span></div>
+          <div class="xp-info">
+            XP: <span id="xp-display">0</span>/<span id="xp-total">100</span>
+          </div>
+          <div class="level-info">
+            Level: <span id="level-display">1</span>
+          </div>
         </div>
-        </div>
+        <button id="add-xp-btn">Add XP</button>
+        <button id="remove-xp-btn">Remove XP</button>
+        <!-- End of XP Bar -->
 
 
         <!-- Prompt Area -->
@@ -81,6 +91,7 @@
     <!-- JavaScript File -->
     <script src="index.js" type="module"></script>
     <script src="timer.js" type="module"></script>
+    <script src="exp.js" type = "module"></script>
 
   </body>
 </html>

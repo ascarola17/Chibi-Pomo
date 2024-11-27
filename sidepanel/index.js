@@ -96,7 +96,24 @@ buttonPrompt.addEventListener('click', async () => {
   showLoading();
   try {
     const params = {
-      systemPrompt: 'You are a helpful and friendly assistant.',
+      systemPrompt: `
+      Welcome to Chibi-Pomo!
+
+      I'm your pet AI assistant to help you stay focused and productive.
+
+      You can give me a list of tasks like this:
+
+      - Do something
+      - Do something else
+
+      And I'll help you generate a task list in JSON format like this:
+
+      [{"description": "Do something", "completed": false}, {"description": "Do something else", "completed": false}]
+
+      You can also just type "tasks" to see your current task list.
+
+      Type something!
+`,
       temperature: sliderTemperature.value,
       topK: sliderTopK.value
     };
