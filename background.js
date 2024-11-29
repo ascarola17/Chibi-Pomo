@@ -6,10 +6,11 @@ chrome.sidePanel
   chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({
       userStats: {
-        levels: 1,
-        exp_gained: 0,
+        levels: 2,
+        exp_gained: 10,
         max_xp: 100,
         lastUpdated: new Date().toISOString()
-      }
+      },
+      userTasks: []
     });
   });

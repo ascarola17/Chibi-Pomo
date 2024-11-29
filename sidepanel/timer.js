@@ -1,4 +1,4 @@
-
+import { addXp, lowerXp } from "./exp.js";
 //TIMER
 
 const startBtn = document.querySelector("#startbtn");
@@ -73,7 +73,7 @@ decreaseTimeBtn.addEventListener("click", () => {
   adjustTimer(-60); 
 });
 
-function startTimer() {
+export function startTimer() {
   if (progressInterval) {
     return; // Prevent multiple intervals
   }
@@ -105,7 +105,7 @@ function setProgressInfo() {
   progressbarNumber.textContent = `${NumbertoString(timerValue)}`;
   progressbar.style.background = `conic-gradient(rgb(243, 72, 109) ${
     timerValue * multipliervalue
-  }deg,crimson 0deg)`;
+  }deg,black 0deg)`;
 }
 
 
@@ -143,7 +143,7 @@ function pauseTimer() {
       resetTimer();
       pomodoroCount = 0; // Reset progress
       currentXP = Math.max(0, currentXP - xpPerSession); // Penalize XP
-      updateXPBar();
+      lowerXp(xpPerSession); // Call function to lose XP
     }
   }, 1000);
 }
@@ -205,7 +205,7 @@ function adjustTimer(amount) {
 function handlePomodoroCompletion() {
   if (pomodoroType === "POMODORO") {
     pomodoroCount++;
-    gainXP(); // Call function to gain XP
+    addXp(xpPerSession); // Call function to gain XP
     if (pomodoroCount % pomodorosUntilLongBreak === 0) {
       setTimeType("LONGBREAK");
     } else {
@@ -219,21 +219,21 @@ function handlePomodoroCompletion() {
 }
 
 
-function gainXP() {
-  currentXP += xpPerSession;
-  if (currentXP >= xpToLevelUp) {
-    currentXP -= xpToLevelUp;
-    // Optionally, increase level or handle leveling up
-  }
-  updateXPBar();
-}
-function updateXPBar() {
-  const xpFill = document.querySelector(".xp-bar-fill");
-  const xpDisplay = document.getElementById("xp-display");
-  const xpTotal = document.getElementById("xp-total");
+// function gainXP() {
+//   currentXP += xpPerSession;
+//   if (currentXP >= xpToLevelUp) {
+//     currentXP -= xpToLevelUp;
+//     // Optionally, increase level or handle leveling up
+//   }
+//   updateXPBar();
+// }
+// function updateXPBar() {
+//   const xpFill = document.querySelector(".xp-bar-fill");
+//   const xpDisplay = document.getElementById("xp-display");
+//   const xpTotal = document.getElementById("xp-total");
 
-  const xpPercentage = (currentXP / xpToLevelUp) * 100;
-  xpFill.style.width = `${xpPercentage}%`;
-  xpDisplay.textContent = currentXP;
-  xpTotal.textContent = xpToLevelUp;
-}
+//   const xpPercentage = (currentXP / xpToLevelUp) * 100;
+//   xpFill.style.width = `${xpPercentage}%`;
+//   xpDisplay.textContent = currentXP;
+//   xpTotal.textContent = xpToLevelUp;
+// }

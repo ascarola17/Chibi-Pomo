@@ -40,7 +40,7 @@
         </div>
 
         <!-- End of Timer Section -->
-
+      
          <!-- XP Bar -->
          <div class="xp-bar-container">
           <div class="xp-bar">
@@ -52,10 +52,17 @@
           <div class="level-info">
             Level: <span id="level-display">1</span>
           </div>
+          <button id="add-xp-btn">Add XP</button>
+          <button id="remove-xp-btn">Remove XP</button>
         </div>
-        <button id="add-xp-btn">Add XP</button>
-        <button id="remove-xp-btn">Remove XP</button>
         <!-- End of XP Bar -->
+
+        <!-- Task List -->
+
+        <input type="text" id="new-task" placeholder="Enter a new task">
+        <button id="add-task">Add Task</button>
+        <ul id="task-list"></ul>
+        <!-- End of Task List -->
 
 
         <!-- Prompt Area -->
@@ -92,6 +99,7 @@
     <script src="index.js" type="module"></script>
     <script src="timer.js" type="module"></script>
     <script src="exp.js" type = "module"></script>
+    <script src="tasklist.js" type = "module"></script>
 
   </body>
 </html>

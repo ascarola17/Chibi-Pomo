@@ -33,7 +33,7 @@ function updateXpBar() {
   xpTotal.textContent = maxXp;
 }
 
-function addXp(amount) {
+export function addXp(amount) {
   currentXp += amount;
   if (currentXp >= maxXp) {
     levelUp();
@@ -50,7 +50,7 @@ function levelUp() {
   saveStats();
 }
 
-function lowerXp(amount) {
+export function lowerXp(amount) {
     if (currentXp <= 0 && level <= 1) return;
     currentXp -= amount;
     if (currentXp <= 0) {
