@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="timer.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Timer Section -->
+      <div class="timer-section">
+        <div class="timer-container">
+          <button id="pomodorobtn" class="active">Pomodoro</button>
+          <button id="shortbrkbtn">Short Break</button>
+          <button id="longbrkbtn">Long Break</button> <!-- Add this line -->
+
+          <!-- If you want the Long Break button, uncomment the line below -->
+          <!-- <button id="longbrkbtn">Long Break</button> -->
+        </div>
+        <div class="progressbar">
+          <div class="progrsbar-inner">
+            <h2 class="progressbar-number">25:00</h2>
+          </div>
+        </div>
+        <!-- Add this div inside the timer-section, under the progress bar -->
+      <div id="pause-message" class="pause-message" style="display: none;">
+        <p>You have <span id="pause-countdown">30</span> seconds to resume or your progress will be lost.</p>
+        <button id="resume-btn">Resume</button>
+      </div>
+
+        <!-- Timer Adjust Buttons in a Row -->
+        <div class="timer-adjust-buttons">
+          <button id="decrease-time">-</button>
+          <button id="increase-time">+</button>
+        </div>
+        <!-- Moved Function Buttons Inside Timer Section -->
+        <div class="function-buttons">
+          <button id="startbtn">Start</button>
+          <button id="pausebtn">Pause</button>
+          <button id="timer-resetbtn">Reset</button>
+        </div>
+         <!-- XP Bar -->
+         <div class="xp-bar-container">
+          <div class="xp-bar">
+            <div class="xp-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="xp-info">XP: <span id="xp-display">0</span>/<span id="xp-total">100</span></div>
+        </div>
+        </div>
+
+
+        <!-- Prompt Area -->
+        <textarea
+          id="input-prompt"
+          placeholder='Type something, e.g. "Write a haiku about Chrome Extensions"'
+          cols="30"
+          rows="5"
+        ></textarea>
+        <div>
+          <input
+            type="range"
+            id="temperature"
+            name="temperature"
+            min="0"
+            max="2"
+            step="0.01"
+          />
+          <label for="temperature">Temperature: <span id="label-temperature"></span></label>
+        </div>
+        <div>
+          <input type="range" id="top-k" name="top-k" min="1" max="8" step="1" />
+          <label for="top-k">Top-k: <span id="label-top-k"></span></label>
+        </div>
+        <button id="button-prompt" class="primary" disabled>Run</button>
+        <button id="button-reset" class="secondary" disabled>Reset</button>
+        <div id="response" class="text" hidden></div>
+        <div id="loading" class="text" hidden><span class="blink">...</span></div>
+        <div id="error" class="text" hidden></div>
+      </div>
+    </div>
+    <!-- End of Prompt Area -->
+    <!-- JavaScript File -->
+    <script src="index.js" type="module"></script>
+    <script src="timer.js" type="module"></script>
+
+  </body>
+</html>
