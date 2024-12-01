@@ -1,0 +1,137 @@
+
+.quest-section {
+    margin-bottom: 20px;
+}
+
+.collapsible {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.collapsible:hover, .collapsible.active {
+    background-color: #0056b3;
+}
+
+.collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.collapsible.active:after {
+    content: "\2212";
+}
+
+.content {
+    padding: 0 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #000000;
+    border-radius: 0 0 5px 5px;
+}
+
+.quest-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.quest-item {
+    background-color: #000000;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.quest-item:hover {
+    background-color: #333232;
+}
+
+.quest-item button {
+    background-color: #3e4740;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quest-item button:hover {
+    background-color: #218838;
+}
+
+.add-quest {
+    margin-top: 20px;
+}
+
+#new-quest-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.star-rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.star-rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star-rating > span:hover:before,
+.star-rating > span:hover ~ span:before {
+    content: "\2605";
+    position: absolute;
+    color: #ffc107;
+}
+
+.star-rating > span.active:before {
+    content: "\2605";
+    position: absolute;
+    color: #ffc107;
+}
+
+#add-quest-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-quest-btn:hover {
+    background-color: #0056b3;
+}
+
+.quest-item.dragging {
+    opacity: 0.5;
+}

@@ -1,8 +1,10 @@
 <!doctype html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="index.css" />
     <link rel="stylesheet" type="text/css" href="timer.css" />
+    <link rel="stylesheet" type="text/css" href="tasklist.css" />
   </head>
   <body>
     <div class="container">
@@ -62,6 +64,35 @@
         <input type="text" id="new-task" placeholder="Enter a new task">
         <button id="add-task">Add Task</button>
         <ul id="task-list"></ul>
+
+        <h1>Quest Tracker</h1>
+
+        <div class="quest-section">
+            <h2 class="collapsible">Current Quests in Progress</h2>
+            <div class="content">
+                <ul id="current-quests" class="quest-list"></ul>
+            </div>
+        </div>
+
+        <div class="quest-section">
+            <h2 class="collapsible">Quest Board</h2>
+            <div class="content">
+                <ul id="quest-board" class="quest-list"></ul>
+            </div>
+        </div>
+
+        <div class="add-quest">
+            <h2>Add New Quest</h2>
+            <input type="text" id="new-quest-input" placeholder="Enter new quest">
+            <div class="star-rating" id="difficulty-rating">
+                <span data-rating="5">☆</span>
+                <span data-rating="4">☆</span>
+                <span data-rating="3">☆</span>
+                <span data-rating="2">☆</span>
+                <span data-rating="1">☆</span>
+            </div>
+            <button id="add-quest-btn">Add Quest</button>
+        </div>
         <!-- End of Task List -->
 
 
