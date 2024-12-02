@@ -244,10 +244,24 @@ let draggedItem = null;
 function dragStart(e) {
     draggedItem = this;
     setTimeout(() => this.classList.add('dragging'), 0);
+    console.log('Drag started!', this);
 }
 
 function dragEnd() {
     this.classList.remove('dragging');
+    console.log('Drag ended!', this);
+    const draggedTask = tasks.find(t => t.id === parseInt(this.getAttribute('data-id')));
+    const parentElement = this.parentElement;
+    if (draggedTask) {
+        if ((parentElement === currentQuests && !draggedTask.currentProgress) ||
+        (parentElement === questBoard && draggedTask.currentProgress)) {
+            console.log('Dragged task:', draggedTask);
+            draggedTask.currentProgress = !draggedTask.currentProgress
+            console.log('Tasks:', tasks);
+            saveTasks();
+        }           
+    }
+    console.log('Tasks:', tasks);
 }
 
 [currentQuests, questBoard].forEach(list => {
@@ -266,6 +280,7 @@ function dragOver(e) {
     } else {
         this.insertBefore(draggable, afterElement);
     }
+
 }
 
 function dragEnter(e) {
@@ -280,6 +295,7 @@ function dragLeave() {
 function drop() {
     this.classList.remove('drag-over');
     updateCollapsibleHeight(this);
+    console.log('Dropped!', this);
 }
 
 function getDragAfterElement(container, y) {
