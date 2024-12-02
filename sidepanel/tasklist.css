@@ -1,6 +1,11 @@
 
 .quest-section {
     margin-bottom: 20px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
 }
 
 .collapsible {
@@ -10,11 +15,12 @@
     padding: 10px;
     width: 100%;
     border: none;
-    text-align: left;
+    text-align: center;
     outline: none;
     font-size: 16px;
     transition: 0.3s;
     border-radius: 5px;
+    display: flex;
 }
 
 .collapsible:hover, .collapsible.active {
@@ -57,6 +63,8 @@
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.3s;
+    flex-direction: column;
+    display: flex;
 }
 
 .quest-item:hover {
@@ -118,6 +126,12 @@
     color: #ffc107;
 }
 
+.difficulty-stars {
+    color: gold;
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
 #add-quest-btn {
     background-color: #007bff;
     color: white;
@@ -134,4 +148,10 @@
 
 .quest-item.dragging {
     opacity: 0.5;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }

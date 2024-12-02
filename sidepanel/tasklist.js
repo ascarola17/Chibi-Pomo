@@ -3,29 +3,6 @@ import { startTimer } from './timer.js';
 // Task management
 let tasks = [];
 
-// DOM elements
-const newTaskInput = document.getElementById('new-task');
-const addTaskButton = document.getElementById('add-task');
-const taskList = document.getElementById('task-list');
-
-function addTask() {
-    const taskText = newTaskInput.value.trim();
-    console.log(taskText);
-    if (taskText) {
-        const task = {
-            id: Date.now(),
-            text: taskText,
-            completed: false,
-            rewards: { xp: 100, gold: 0 }
-        };
-        tasks.push(task);
-        renderTask(task);
-        newTaskInput.value = '';
-        saveTasks();
-    }
-    console.log(tasks);
-}
-
 // Render task
 function renderTask(task) {
     const li = document.createElement('li');
@@ -44,7 +21,6 @@ function renderTask(task) {
     li.querySelector('.edit-task').addEventListener('click', editTask);
     li.querySelector('.delete-task').addEventListener('click', deleteTask);
     li.querySelector('.start-task').addEventListener('click', startTask);
-    taskList.appendChild(li);
 }
 
 // Toggle complete
@@ -99,12 +75,6 @@ function saveTasks() {
 function loadTasks() {
     chrome.storage.sync.get(['userTasks'], (result) => {
         if (result.userTasks) {
-            tasks = result.userTasks;
-            tasks.forEach(task => renderTask(task));
-        }
-    });
-    chrome.storage.sync.get(['userTasks'], (result) => {
-        if (result.userTasks) {
             console.log(result.userTasks);
             tasks = result.userTasks;
             tasks.forEach(task => addQuest(task.text, task.difficulty, task.rewards.xp, task));
@@ -114,12 +84,6 @@ function loadTasks() {
 
 // Load tasks when the script runs
 loadTasks();
-
-
-// Event listeners
-addTaskButton.addEventListener('click', () => {
-    addTask();
-});
 
 
 const currentQuests = document.getElementById('current-quests');
@@ -188,15 +152,18 @@ function addQuest(text, difficulty, exp, task) {
     li.className = 'quest-item';
     li.draggable = true;
     li.innerHTML = `
-        <span>${text}</span> 
-        <span>(Difficulty: ${difficulty}, EXP: ${exp})</span>
-        <button class="move-btn">Move</button>
         <input type="checkbox" class="input-task-complete" ${task.completed ? 'checked' : ''}>
-        <span ${task.completed ? 'class="completed"' : ''}>${text}</span>
+        <span>${text}</span> 
+        <div class = "difficulty-stars">
+            ${'★'.repeat(difficulty)}
+        </div>
         <span class="rewards">+${task.rewards.xp} XP</span>
-        <button class="edit-task">Edit</button>
-        <button class="delete-task">Delete</button>
-        <button class="start-task">Start</button>
+        <div class = "button-group">
+            <button class="edit-task">Edit</button>
+            <button class="delete-task">Delete</button>
+            <button class="start-task">Start</button>
+            <button class="move-btn">Move</button>
+        </div>
     `;
     li.dataset.id = task.id;
 
@@ -206,7 +173,6 @@ function addQuest(text, difficulty, exp, task) {
     li.querySelector('.edit-task').addEventListener('click', editTask);
     li.querySelector('.delete-task').addEventListener('click', deleteTask);
     li.querySelector('.start-task').addEventListener('click', startTask);
-    taskList.appendChild(li);
 
     if (task.currentProgress === true) {
         currentQuests.appendChild(li);

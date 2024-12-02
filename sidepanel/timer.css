@@ -275,3 +275,6 @@ body {
     transform: translateY(-2px);
   }
   
+  .level-info {
+    text-align: center;
+  }
